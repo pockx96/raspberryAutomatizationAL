@@ -3,7 +3,7 @@ from time import time, sleep
 import requests
 import json
 import pandas as pd
-import ex_test as nueva_fila_excel
+from ex_test import *
 
 # Configuración del botón
 pin_boton = 17  # Ejemplo de pin GPIO donde está conectado el botón
