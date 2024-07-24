@@ -2,6 +2,8 @@ from gpiozero import Button
 from time import time, sleep
 import requests
 import json
+import pandas as pd
+import ex_test as nueva_fila_excel
 
 # Configuración del botón
 pin_boton = 17  # Ejemplo de pin GPIO donde está conectado el botón
@@ -22,13 +24,17 @@ def medir_tiempo():
                 if tiempo_inicio is not None:
                     tiempo_fin = time()  # Guardar el tiempo de fin
                     lectura = tiempo_fin - tiempo_inicio
-                    print(f"Tiempo presionado: {lectura:.2f} segundos")
+                    ruta_archivo = 'vending.xlsx'
+                    valores = ['602', 'vending', lectura]
+                    nueva_fila_excel(ruta_archivo, valores)
                     tiempo_inicio = None  # Reiniciar el tiempo de inicio
-                    enviar_post(lectura)
             
             sleep(0.1)  # Esperar un breve periodo para evitar lecturas muy rápidas
     except KeyboardInterrupt:
         print("\nPrograma detenido por el usuario.")
+
+
+
 
 def enviar_post(lectura):
     url = 'https://jsonplaceholder.typicode.com/posts'
@@ -46,6 +52,9 @@ def enviar_post(lectura):
         print('POST enviado con éxito:', response.json())
     else:
         print('Error al enviar POST:', response.status_code)
+
+
+
 
 # Ejecutar la función de medición de tiempo
 medir_tiempo()
