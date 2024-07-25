@@ -13,6 +13,7 @@ mi_boton = Button(pin_boton)
 tiempo_inicio = None
 lectura = 0
 
+
 def medir_tiempo():
     global tiempo_inicio, lectura
     try:
@@ -24,7 +25,7 @@ def medir_tiempo():
                 if tiempo_inicio is not None:
                     tiempo_fin = time()  # Guardar el tiempo de fin
                     lectura = tiempo_fin - tiempo_inicio
-                    ruta_archivo = 'vending.xlsx'
+                    ruta_archivo = '/mnt/compartido/vending.xlsx'
                     valores = ['602', 'vending', lectura]
                     nueva_fila_excel(ruta_archivo, valores)
                     tiempo_inicio = None  # Reiniciar el tiempo de inicio
